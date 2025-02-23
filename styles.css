@@ -41,10 +41,10 @@ header .container {
 }
 
 .logo {
-  height: 50px;
-  background-color: #111; /* Match navbar color */
-  padding: 5px;
-  border-radius: 5px;
+  height: 50px; /* Adjust height as needed */
+  padding: 5px; /* Optional: Add padding if needed */
+  border-radius: 5px; /* Optional: Add rounded corners */
+  /* Remove background-color to ensure transparency */
 }
 
 nav ul {
