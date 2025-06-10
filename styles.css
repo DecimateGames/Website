@@ -1,225 +1,378 @@
-/* General Styles */
+/* Make body take full height */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Reset some default styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  font-family: 'Rubik', sans-serif;
-  background-color: #1a1a1a;
-  color: #ffffff;
-  margin: 0;
-  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #121212;
+  color: #e0e0e0;
   line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-h1, h2, h3 {
-  font-weight: 700;
-}
-
-a {
-  color: #ff6f61; /* Red accent color */
-  text-decoration: none;
-}
-
-a:hover {
-  color: #ff3b2f; /* Darker red on hover */
-}
-
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Header */
 header {
-  background-color: #111;
-  padding: 20px 0;
-  border-bottom: 2px solid #ff6f61; /* Red border */
-}
-
-header .container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  background-color: #1f1f1f;
+  padding: 0 1.5rem;
+  height: 60px;
+  gap: 1rem;
+  user-select: none;
+  border-bottom: 1px solid #333;
 }
 
-.logo {
-  height: 50px; /* Adjust height as needed */
-  padding: 5px; /* Optional: Add padding if needed */
-  border-radius: 5px; /* Optional: Add rounded corners */
-  /* Remove background-color to ensure transparency */
+/* Logo container */
+.logo img {
+  height: 40px;
+  width: auto;
+  display: block;
 }
 
+/* Navigation styles */
 nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
-  gap: 20px;
+  list-style: none;
+  align-items: center;
+  gap: 1.5rem;
+  margin-left: 0;
 }
 
 nav ul li a {
-  font-weight: 500;
-  font-size: 1.1rem;
-}
-
-/* Hero Section */
-.hero, .contact-hero, .newsletter-hero {
-  background: url('assets/background.jpg') no-repeat center center/cover;
-  height: 50vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #fff;
-}
-
-.hero h1, .contact-hero h1, .newsletter-hero h1 {
-  font-size: 3.5rem;
-  margin-bottom: 10px;
-}
-
-.hero p, .contact-hero p, .newsletter-hero p {
-  font-size: 1.2rem;
-  color: #ccc;
-}
-
-.btn {
-  background-color: #ff6f61; /* Red accent color */
-  color: #fff; /* Ensure text is white */
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  font-weight: 500;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.btn:hover {
-  background-color: #ff3b2f; /* Darker red on hover */
-  color: #fff; /* Ensure text remains white on hover */
-}
-
-/* Games Section */
-.games {
-  padding: 60px 0;
-}
-
-.games h2 {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.game-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.game-card {
-  background-color: #222;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  transition: outline 0.3s;
-}
-
-.game-card img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.game-card h3 {
-  margin-top: 15px;
-  font-size: 1.5rem;
-}
-
-.game-card p {
-  color: #ccc;
-}
-
-/* About Section */
-.about {
-  padding: 60px 0;
-  background-color: #111;
-}
-
-.about h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.about p {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-  font-size: 1.1rem;
-  line-height: 1.8;
-}
-
-/* Contact Form Section */
-.contact-form, .newsletter-form {
-  padding: 60px 0;
-}
-
-.contact-form .container, .newsletter-form .container {
-  max-width: 800px;
-}
-
-.contact-form form, .newsletter-form form {
-  background-color: #222;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 8px;
-  color: #ff6f61; /* Red accent color */
-}
-
-.form-group input, .form-group textarea {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid #ff6f61; /* Red border */
-  border-radius: 8px;
-  background-color: #333;
-  color: #fff;
-  font-size: 1rem;
-  transition: border-color 0.3s;
-}
-
-.form-group input:focus, .form-group textarea:focus {
-  border-color: #ff3b2f; /* Darker red on focus */
+  color: #aaa;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 0;
+  border-bottom: none;
+  transition: color 0.3s;
   outline: none;
 }
 
-.form-group textarea {
-  resize: vertical;
-  height: 150px;
+nav ul li a.active {
+  color: #fff;
+  font-weight: 700;
+  border-bottom: none;
 }
 
-/* Footer */
-footer {
-  background-color: #111;
-  padding: 20px 0;
+nav ul li a:hover,
+nav ul li a:focus {
+  color: #fff;
+  outline: none;
+}
+
+/* Intro section */
+.intro {
+  padding: 40px 20px 20px;
   text-align: center;
-  border-top: 2px solid #ff6f61; /* Red border */
 }
 
+.intro .headline {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.intro .tagline {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 4rem;
+  color: #ccc;
+}
+
+/* Games section */
+.games {
+  padding: 2rem 1.5rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+
+.games h2 {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+/* Game cards container */
+.game-cards {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #444 transparent;
+}
+
+.game-cards::-webkit-scrollbar {
+  height: 6px;
+}
+
+.game-cards::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.game-cards::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 3px;
+}
+
+/* Individual game card */
+.game-card {
+  background-color: #161616;
+  border-radius: 8px;
+  flex: 0 0 280px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: none;
+  transition: none;
+  user-select: none;
+}
+
+.game-card:hover {
+  box-shadow: none;
+}
+
+.game-image {
+  position: relative;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  overflow: hidden;
+  background: #2b2b2b;
+}
+
+.game-image:hover img {
+  filter: brightness(1.5);
+  transition: filter 0.3s ease;
+}
+
+.game-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.coming-soon-band {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(20, 20, 20, 0.5);
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0;
+  text-align: center;
+  font-size: 0.75rem;
+  pointer-events: none;
+  user-select: none;
+  border-radius: 0;
+  letter-spacing: 1px;
+  transform: none;
+}
+
+.game-image.coming-soon img {
+  filter: none !important;
+}
+
+.game-card h3 {
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 1rem;
+  color: #fff;
+  flex-grow: 1;
+}
+
+.store-buttons {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0 1rem 1rem;
+}
+
+.store-btn {
+  display: inline-block;
+  background: #2e2e2e;
+  border-radius: 6px;
+  padding: 6px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.store-btn:hover {
+  background-color: #3f3f3f;
+}
+
+.store-btn img {
+  display: block;
+  width: 28px;
+  height: 28px;
+  filter: brightness(1.1);
+  transition: filter 0.3s ease;
+}
+
+.store-btn:hover img {
+  filter: brightness(1.5);
+}
+
+/* === Footer Social Icon Styling === */
+.social-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid transparent;
+  transition: transform 0.2s ease, filter 0.3s ease;
+  filter: brightness(4); /* Brighten even black PNGs */
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+  filter: brightness(6); /* Make brighter on hover */
+}
+
+footer {
+  margin-top: auto;
+  padding: 2rem 1.5rem 2rem; /* Increase vertical padding */
+  background-color: #1f1f1f;
+  border-top: 1px solid #333;
+  color: #aaa;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem; /* Slightly larger gap */
+  user-select: none;
+  min-height: 140px; /* Ensures there's enough height even with minimal content */
+}
+
+footer .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+footer .social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+footer .social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  filter: brightness(4);
+  transition: filter 0.3s ease, transform 0.2s ease;
+}
+
+footer .social-icon:hover {
+  filter: brightness(6);
+  transform: scale(1.1);
+}
+
+/* Optional: footer text styling */
 footer p {
   margin: 0;
+  font-size: 0.9rem;
+  color: #ccc;
 }
 
-.social-links {
-  margin-top: 10px;
+/* Social icons container */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
-.social-links a {
-  margin: 0 10px;
-  color: #ff6f61; /* Red accent color */
+.social-icons a {
+  color: #888;
+  transition: color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icons a:hover,
+.social-icons a:focus {
+  color: #e65252;
+  outline: none;
+}
+
+.social-icons svg,
+.social-icons img {
+  width: 24px;
+  height: 24px;
+  display: block;
+  object-fit: contain;
+  fill: currentColor;
+}
+
+/* Games Title Styling */
+.games-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #ccc;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  header {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 1rem;
+  }
+
+  nav ul {
+    width: 100%;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .game-cards {
+    gap: 1rem;
+  }
+
+  .game-card {
+    flex: 0 0 220px;
+  }
+
+  .intro .headline {
+    font-size: 2.5rem;
+    line-height: 0.9;
+  }
+
+  .intro .tagline {
+    font-size: 1rem;
+  }
 }

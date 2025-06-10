@@ -1,84 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Decimate Games</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <header>
-    <div class="container">
-      <img src="assets/logo.png" alt="Decimate Games Logo" class="logo">
+  <div class="page-container">
+    <header>
+      <div class="logo" aria-label="Decimate Games Logo">
+        <img src="images/logo.png" alt="Decimate Games Logo" />
+      </div>
       <nav>
         <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#games">Games</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="newsletter.html">Newsletter</a></li>
+          <li><a href="#games" class="active" aria-current="page">Games</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-    </div>
-  </header>
+    </header>
 
-  <section id="home" class="hero">
-    <div class="container">
-      <h1>Welcome to Decimate Games</h1>
-      <p>Where creativity meets destruction.</p>
-      <a href="#games" class="btn">Explore Our Games</a>
-    </div>
-  </section>
+    <section class="intro" role="main">
+      <h1 class="headline">Decimate Games</h1>
+      <p class="tagline">We don’t tell stories, we tear them apart.</p>
+    </section>
 
-  <section id="games" class="games">
-    <div class="container">
-      <h2>Our Games</h2>
-      <div class="game-grid">
+    <section class="games" id="games" aria-label="Our Games">
+      <h2 class="games-title">Our Games</h2>
+      <div class="game-cards">
         <div class="game-card">
-          <img src="assets/game1.jpg" alt="Unannounced Game 1">
-          <h3>Unannounced Game Title 1</h3>
-          <p>An epic adventure awaits.</p>
+          <div class="game-image">
+            <img src="images/game_placeholder.png" alt="Project Name" />
+             <div class="coming-soon-band">Coming Soon</div>
+          </div>
+          <h3>Shipping Nightmares</h3>
           <div class="store-buttons">
-            <a href="https://store.steampowered.com" class="store-link" target="_blank">
-              <img src="assets/steam-logo.png" alt="Steam Logo" class="store-logo">
+            <a href="https://store.steampowered.com/app/3480910/Shipping_Nightmares/" class="store-btn" title="Steam Store" aria-label="Steam Store" target="_blank" rel="noopener noreferrer">
+              <img src="images/steam.png" alt="Steam" />
             </a>
-            <span class="coming-soon">Coming Soon</span>
+            <a href="#" class="store-btn" title="Epic Games Store" aria-label="Epic Games Store">
+              <img src="images/epicgames.png" alt="Epic Games" />
+            </a>
           </div>
         </div>
+
         <div class="game-card">
-          <img src="assets/game2.jpg" alt="Unannounced Game 2">
-          <h3>Unannounced Game Title 2</h3>
-          <p>Survive the chaos.</p>
+          <div class="game-image">
+            <img src="images/game_placeholder.png" alt="Project Name" />
+             <div class="coming-soon-band">Coming Soon</div>
+          </div>
+          <h3>Project Name</h3>
           <div class="store-buttons">
-            <a href="https://store.epicgames.com" class="store-link" target="_blank">
-              <img src="assets/epic-logo.png" alt="Epic Games Logo" class="store-logo">
+            <a href="#" class="store-btn" title="Steam Store" aria-label="Steam Store">
+              <img src="images/steam.png" alt="Steam" />
             </a>
-            <span class="coming-soon">Coming Soon</span>
+            <a href="#" class="store-btn" title="Epic Games Store" aria-label="Epic Games Store">
+              <img src="images/epicgames.png" alt="Epic Games" />
+            </a>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="about" class="about">
-    <div class="container">
-      <h2>About Us</h2>
-      <p>Decimate Games is an innovative indie game studio passionate about crafting immersive and unforgettable gaming experiences. Our team of dedicated developers, designers, and storytellers is committed to pushing the boundaries of creativity and technology. We strive to create games that captivate, challenge, and inspire players around the world.</p>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Decimate Games. All rights reserved.</p>
-      <div class="social-links">
-        <a href="https://x.com/Decimate_Games">X</a>       
-        <a href="https://www.youtube.com/@Decimate-Games">YouTube</a>
-        <a href="https://www.discord.com/RBHPkSgvyA">Discord</a>
+    <footer>
+      <div class="social-icons">
+        <a href="https://www.youtube.com/@Decimate_Games" target="_blank" rel="noopener noreferrer">
+          <img src="images/youtube.png" alt="Youtube" class="social-icon" />
+        </a>
+        <a href="https://x.com/Decimate_Games" target="_blank" rel="noopener noreferrer">
+          <img src="images/twitter.png" alt="X" class="social-icon" />
+        </a>
+        <a href="https://discord.gg/RBHPkSgvyA" target="_blank" rel="noopener noreferrer">
+          <img src="images/discord.png" alt="Discord" class="social-icon" />
+        </a>
+        <a href="https://www.reddit.com/r/DecimateGames/" target="_blank" rel="noopener noreferrer">
+          <img src="images/reddit.png" alt="Reddit" class="social-icon" />
+        </a>
+        <a href="https://www.facebook.com/DecimateGames/" target="_blank" rel="noopener noreferrer">
+          <img src="images/facebook.png" alt="Facebook" class="social-icon" />
+        </a>
+        <a href="https://www.instagram.com/DecimateGames/" target="_blank" rel="noopener noreferrer">
+          <img src="images/instagram.png" alt="Instagram" class="social-icon" />
+        </a>
       </div>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+      <div class="copyright">
+        &copy; 2025 Decimate Games. All rights reserved.
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
