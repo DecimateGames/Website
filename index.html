@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Decimate Games</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
@@ -16,58 +16,62 @@
       </div>
       <nav>
         <ul>
-          <li><a href="#games" class="active" aria-current="page">Games</a></li>
-          <li><a href="#news">News</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="index.html" class="active" aria-current="page">Games</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </header>
 
-    <section class="intro" role="main">
+    <main class="intro" role="main">
       <h1 class="headline">Decimate Games</h1>
-      <p class="tagline">We don’t tell stories, we tear them apart.</p>
-    </section>
+      <p class="tagline">Beautifully Broken. Brutally Fun.</p>
+    </main>
 
-    <section class="games" id="games" aria-label="Our Games">
-      <h2 class="games-title">Our Games</h2>
-      <div class="game-cards">
-        <div class="game-card">
-          <div class="game-image">
-            <img src="images/game_placeholder.png" alt="Project Name" />
-             <div class="coming-soon-band">Coming Soon</div>
+     <section class="games" id="games">
+      <div class="carousel-container">
+        <button class="carousel-btn prev" aria-label="Previous Game">&#8592;</button>
+        <div class="carousel">
+          
+          <!-- Card 1 -->
+          <div class="game-card active">
+            <div class="game-image">
+              <img src="images/game_placeholder_art.png" alt="Shipping Nightmares" />
+            </div>
+            <div class="game-info">
+              <h3>Shipping Nightmares</h3>
+              <div class="store-buttons">
+                <a href="https://store.steampowered.com/app/3480910/Shipping_Nightmares/" class="store-btn" aria-label="Steam" target="_blank" rel="noopener noreferrer">
+                  <img src="images/steam.png" alt="Steam" />
+                </a>
+                <a href="https://store.epicgames.com/en-US" class="store-btn" aria-label="Epic" target="_blank" rel="noopener noreferrer">
+                  <img src="images/epicgames.png" alt="Epic" />
+                </a>
+                <a href="https://www.youtube.com/@Decimate_Games" class="store-btn" aria-label="Trailer" target="_blank" rel="noopener noreferrer">
+                  <img src="images/youtube1.png" alt="YouTube" />
+                </a>
+              </div>
+            </div>
           </div>
-          <h3>Shipping Nightmares</h3>
-          <div class="store-buttons">
-            <a href="https://store.steampowered.com/app/3480910/Shipping_Nightmares/" class="store-btn" title="Steam Store" aria-label="Steam Store" target="_blank" rel="noopener noreferrer">
-              <img src="images/steam.png" alt="Steam" />
-            </a>
-            <a href="#" class="store-btn" title="Epic Games Store" aria-label="Epic Games Store">
-              <img src="images/epicgames.png" alt="Epic Games" />
-            </a>
-            <a href="https://youtu.be/YOUR_TRAILER_ID" class="store-btn" title="Watch Trailer" aria-label="Watch Trailer" target="_blank" rel="noopener noreferrer">
-            <img src="images/youtube_colors.png" alt="Watch Trailer" />
-            </a>
-          </div>
-        </div>
 
-        <div class="game-card">
-          <div class="game-image">
-            <img src="images/game_placeholder.png" alt="Project Name" />
-             <div class="coming-soon-band">Coming Soon</div>
+          <!-- Card 2 -->
+          <div class="game-card">
+            <div class="game-image">
+              <img src="images/placeholder.png" alt="Project Name" />
+              <div class="coming-soon-badge">Coming Soon</div>
+            </div>
+            <div class="game-info">
+              <h3>Project Name</h3>
+              <div class="store-buttons">
+                <a href="https://store.steampowered.com" class="store-btn" aria-label="Steam" target="_blank" rel="noopener noreferrer"><img src="images/steam.png" alt="Steam" /></a>
+                <a href="https://store.epicgames.com/en-US" class="store-btn" aria-label="Epic" target="_blank" rel="noopener noreferrer"><img src="images/epicgames.png" alt="Epic" /></a>
+                <a href="https://www.youtube.com/@Decimate_Games" class="store-btn" aria-label="Trailer" target="_blank" rel="noopener noreferrer"><img src="images/youtube1.png" alt="YouTube" /></a>
+              </div>
+            </div>
           </div>
-          <h3>Project Name</h3>
-          <div class="store-buttons">
-            <a href="#" class="store-btn" title="Steam Store" aria-label="Steam Store">
-              <img src="images/steam.png" alt="Steam" />
-            </a>
-            <a href="#" class="store-btn" title="Epic Games Store" aria-label="Epic Games Store">
-              <img src="images/epicgames.png" alt="Epic Games" />
-            </a>
-            <a href="#" class="store-btn" title="Watch Trailer" aria-label="Watch Trailer">
-            <img src="images/youtube_colors.png" alt="Watch Trailer" />
-            </a>
-          </div>
+
         </div>
+        <button class="carousel-btn next" aria-label="Next Game">&#8594;</button>
       </div>
     </section>
 
@@ -97,5 +101,31 @@
       </div>
     </footer>
   </div>
+
+  <script>
+    const cards = document.querySelectorAll('.game-card');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+    let currentIndex = 0;
+
+    function showCard(index) {
+      cards.forEach((card, i) => {
+        card.classList.toggle('active', i === index);
+      });
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+      showCard(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % cards.length;
+      showCard(currentIndex);
+    });
+
+    // Initialize
+    showCard(currentIndex);
+  </script>
 </body>
 </html>
