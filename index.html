@@ -1,131 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Decimate Games</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decimate Games</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Rubik;
+        }
+
+        .carousel-slide {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .carousel-slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .store-logo {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        .light .store-logo {
+            filter: none;
+        }
+
+        .theme-transition {
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+    </style>
 </head>
-<body>
-  <div class="page-container">
-    <header>
-      <div class="logo" aria-label="Decimate Games Logo">
-        <img src="images/logo.png" alt="Decimate Games Logo" />
-      </div>
-      <nav>
-        <ul>
-          <li><a href="index.html" class="active" aria-current="page">Games</a></li>
-          <li><a href="news.html">News</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
+<body class="dark theme-transition bg-gray-900">
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 bg-gray-900/95 backdrop-blur-md border-b border-gray-900 theme-transition">
+        <div class="container mx-auto px-6 py-4 flex items-center justify-between max-w-7xl">
+            <div class="flex items-center gap-3">
+                <!-- Logo Image -->
+                <img src="images/logo.png" alt="Decimate Games Logo" class="h-10 w-auto">
+                 <!-- <h1 class="text-2xl font-bold text-white dark:text-white light:text-gray-900">Decimate Games</h1> -->
+            </div>
+            
+            <button id="themeToggle" class="p-2 rounded-lg bg-gray-800 dark:bg-gray-800 light:bg-gray-200 text-yellow-400 dark:text-yellow-400 light:text-gray-700 hover:scale-110 transition-transform">
+                <svg id="sunIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+                <svg id="moonIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                </svg>
+            </button>
+        </div>
     </header>
 
-    <main class="intro" role="main">
-      <h1 class="headline">Decimate Games</h1>
-      <p class="tagline">Beautifully Broken. Brutally Fun.</p>
+    <!-- Main Content -->
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-12 text-center max-w-7xl">
+            <h2 class="text-5xl md:text-6xl font-bold mb-4 text-white dark:text-white light:text-gray-900">Decimate Games</h2>
+            <p class="text-xl text-gray-400 dark:text-gray-400 light:text-gray-600 max-w-2xl mx-auto">
+                Beautifully Broken. Brutally Fun.
+            </p>
+        </section>
+
+        <!-- Carousel Section -->
+        <section class="container mx-auto px-6 py-12 max-w-7xl">
+            <div class="relative">
+                <!-- Game Slides -->
+                <div id="carousel" class="relative overflow-hidden rounded-2xl shadow-2xl">
+                    
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide active relative h-[500px] md:h-[600px]" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%), url('images/sn.png?w=1200&h=600&fit=crop') center/cover;">
+                        <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+                            <h3 class="text-4xl md:text-5xl font-bold text-white mb-4">Shipping Nightmares</h3>
+                            <p class="text-xl text-gray-200 mb-6 max-w-2xl">
+                                A co-op horror game where you and your teammates must scavenge for supplies, and survive relentless horrors lurking in the shadows.
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-4 mb-6">
+                                <a href="#" class="bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all p-3 rounded-lg">
+                                    <img src="images/steam.png" alt="Steam" class="store-logo">
+                                </a>
+                                <a href="#" class="bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all p-3 rounded-lg">
+                                    <img src="images/epicgames.png" alt="Epic" class="store-logo">
+                                </a>
+                            </div>
+
+                            <button class="trailer-btn bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-all hover:scale-105" data-trailer="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                                Watch Trailer
+                            </button>
+                        </div>
+                    </div>
+
+              
+                    <!-- Navigation Arrows -->
+                    <button id="prevBtn" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <button id="nextBtn" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Slide Indicators -->
+                <div id="indicators" class="flex justify-center gap-2 mt-6">
+                    <button class="indicator h-2 w-8 rounded-full bg-red-600 transition-all" data-slide="0"></button>
+                    <button class="indicator h-2 w-2 rounded-full bg-gray-600 dark:bg-gray-600 light:bg-gray-300 transition-all" data-slide="1"></button>
+                    <button class="indicator h-2 w-2 rounded-full bg-gray-600 dark:bg-gray-600 light:bg-gray-300 transition-all" data-slide="2"></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="py-20 bg-gray-900 dark:bg-gray-900 light:bg-gray-100 theme-transition">
+            <div class="container mx-auto px-6 text-center max-w-7xl">
+                <h3 class="text-3xl font-bold mb-4 text-white dark:text-white light:text-gray-900">About Our Studio</h3>
+                <p class="text-lg text-gray-300 dark:text-gray-300 light:text-gray-600 max-w-3xl mx-auto">
+                    At DecimateGames, we're passionate about creating unforgettable gaming experiences. 
+                    Our team of dedicated developers, artists, and storytellers work together to bring 
+                    innovative and immersive worlds to life. From concept to release, we pour our hearts 
+                    into every project.
+                </p>
+            </div>
+        </section>
     </main>
 
-     <section class="games" id="games">
-      <div class="carousel-container">
-        <button class="carousel-btn prev" aria-label="Previous Game">&#8592;</button>
-        <div class="carousel">
-          
-          <!-- Card 1 -->
-          <div class="game-card active">
-            <div class="game-image">
-              <img src="images/game_placeholder_art.png" alt="Shipping Nightmares" />
-            </div>
-            <div class="game-info">
-              <h3>Shipping Nightmares</h3>
-              <div class="store-buttons">
-                <a href="https://store.steampowered.com/app/3480910/Shipping_Nightmares/" class="store-btn" aria-label="Steam" target="_blank" rel="noopener noreferrer">
-                  <img src="images/steam.png" alt="Steam" />
-                </a>
-                <a href="https://store.epicgames.com/en-US" class="store-btn" aria-label="Epic" target="_blank" rel="noopener noreferrer">
-                  <img src="images/epicgames.png" alt="Epic" />
-                </a>
-                <a href="https://www.youtube.com/@Decimate_Games" class="store-btn" aria-label="Trailer" target="_blank" rel="noopener noreferrer">
-                  <img src="images/youtube1.png" alt="YouTube" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 2 -->
-          <div class="game-card">
-            <div class="game-image">
-              <img src="images/placeholder.png" alt="Project Name" />
-              <div class="coming-soon-badge">Coming Soon</div>
-            </div>
-            <div class="game-info">
-              <h3>Project Name</h3>
-              <div class="store-buttons">
-                <a href="https://store.steampowered.com" class="store-btn" aria-label="Steam" target="_blank" rel="noopener noreferrer"><img src="images/steam.png" alt="Steam" /></a>
-                <a href="https://store.epicgames.com/en-US" class="store-btn" aria-label="Epic" target="_blank" rel="noopener noreferrer"><img src="images/epicgames.png" alt="Epic" /></a>
-                <a href="https://www.youtube.com/@Decimate_Games" class="store-btn" aria-label="Trailer" target="_blank" rel="noopener noreferrer"><img src="images/youtube1.png" alt="YouTube" /></a>
-              </div>
-            </div>
-          </div>
-
+    <!-- Footer -->
+    <footer class="py-8 bg-black dark:bg-black light:bg-gray-100 border-t border-gray-900 dark:border-gray-900 light:border-gray-200 theme-transition">
+        <div class="container mx-auto px-6 text-center max-w-7xl">
+            <p class="text-gray-400 dark:text-gray-400 light:text-gray-600">© 2025 DecimateGames. All rights reserved.</p>
         </div>
-        <button class="carousel-btn next" aria-label="Next Game">&#8594;</button>
-      </div>
-    </section>
-
-    <footer>
-      <div class="social-icons">
-        <a href="https://www.youtube.com/@Decimate_Games" target="_blank" rel="noopener noreferrer">
-          <img src="images/youtube.png" alt="Youtube" class="social-icon" />
-        </a>
-        <a href="https://x.com/Decimate_Games" target="_blank" rel="noopener noreferrer">
-          <img src="images/twitter.png" alt="X" class="social-icon" />
-        </a>
-        <a href="https://discord.gg/RBHPkSgvyA" target="_blank" rel="noopener noreferrer">
-          <img src="images/discord.png" alt="Discord" class="social-icon" />
-        </a>
-        <a href="https://www.reddit.com/r/DecimateGames/" target="_blank" rel="noopener noreferrer">
-          <img src="images/reddit.png" alt="Reddit" class="social-icon" />
-        </a>
-        <a href="https://www.facebook.com/DecimateGames/" target="_blank" rel="noopener noreferrer">
-          <img src="images/facebook.png" alt="Facebook" class="social-icon" />
-        </a>
-        <a href="https://www.instagram.com/DecimateGames/" target="_blank" rel="noopener noreferrer">
-          <img src="images/instagram.png" alt="Instagram" class="social-icon" />
-        </a>
-      </div>
-      <div class="copyright">
-        &copy; 2025 Decimate Games. All rights reserved.
-      </div>
     </footer>
-  </div>
 
-  <script>
-    const cards = document.querySelectorAll('.game-card');
-    const prevBtn = document.querySelector('.carousel-btn.prev');
-    const nextBtn = document.querySelector('.carousel-btn.next');
-    let currentIndex = 0;
+    <!-- Trailer Modal -->
+    <div id="trailerModal" class="modal">
+        <div class="relative w-full max-w-4xl">
+            <button id="closeModal" class="absolute -top-12 right-0 text-white hover:text-red-500 text-xl font-bold">
+                Close ✕
+            </button>
+            <div class="relative w-full aspect-video">
+                <iframe id="trailerIframe" class="w-full h-full rounded-lg" src="" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 
-    function showCard(index) {
-      cards.forEach((card, i) => {
-        card.classList.toggle('active', i === index);
-      });
-    }
+    <script>
+        // Carousel functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const totalSlides = slides.length;
 
-    prevBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-      showCard(currentIndex);
-    });
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(ind => {
+                ind.classList.remove('w-8', 'bg-red-600');
+                ind.classList.add('w-2', 'bg-gray-600');
+            });
+            
+            slides[index].classList.add('active');
+            indicators[index].classList.remove('w-2', 'bg-gray-600');
+            indicators[index].classList.add('w-8', 'bg-red-600');
+        }
 
-    nextBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % cards.length;
-      showCard(currentIndex);
-    });
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
 
-    // Initialize
-    showCard(currentIndex);
-  </script>
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        // Auto-advance carousel every 5 seconds
+        let autoSlide = setInterval(nextSlide, 5000);
+
+        // Navigation buttons
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            clearInterval(autoSlide);
+            nextSlide();
+            autoSlide = setInterval(nextSlide, 5000);
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            clearInterval(autoSlide);
+            prevSlide();
+            autoSlide = setInterval(nextSlide, 5000);
+        });
+
+        // Indicator buttons
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                clearInterval(autoSlide);
+                currentSlide = index;
+                showSlide(currentSlide);
+                autoSlide = setInterval(nextSlide, 5000);
+            });
+        });
+
+        // Theme toggle - Simplified version with proper text colors
+        const body = document.body;
+        const themeToggle = document.getElementById('themeToggle');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+
+        // Set initial theme based on localStorage or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            setLightTheme();
+        } else {
+            setDarkTheme();
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark')) {
+                setLightTheme();
+                localStorage.setItem('theme', 'light');
+            } else {
+                setDarkTheme();
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        function setDarkTheme() {
+            body.classList.remove('light');
+            body.classList.add('dark');
+            
+            // Set dark mode colors
+            body.classList.remove('bg-gray-50');
+            body.classList.add('bg-gray-900');
+            
+            // Update indicator dots for dark mode
+            indicators.forEach((ind, index) => {
+                if (index !== currentSlide) {
+                    ind.classList.remove('bg-gray-300');
+                    ind.classList.add('bg-gray-600');
+                }
+            });
+            
+            // Update theme toggle button
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        }
+
+        function setLightTheme() {
+            body.classList.remove('dark');
+            body.classList.add('light');
+            
+            // Set light mode colors
+            body.classList.remove('bg-gray-900');
+            body.classList.add('bg-gray-50');
+            
+            // Update indicator dots for light mode
+            indicators.forEach((ind, index) => {
+                if (index !== currentSlide) {
+                    ind.classList.remove('bg-gray-600');
+                    ind.classList.add('bg-gray-300');
+                }
+            });
+            
+            // Update theme toggle button
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        }
+
+        // Trailer modal
+        const modal = document.getElementById('trailerModal');
+        const trailerIframe = document.getElementById('trailerIframe');
+        const closeModal = document.getElementById('closeModal');
+        const trailerBtns = document.querySelectorAll('.trailer-btn');
+
+        trailerBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const trailerUrl = btn.getAttribute('data-trailer');
+                trailerIframe.src = trailerUrl;
+                modal.classList.add('active');
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+            trailerIframe.src = '';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                trailerIframe.src = '';
+            }
+        });
+    </script>
+
 </body>
 </html>
