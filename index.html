@@ -11,41 +11,34 @@
   <style>
     /* Base reset */
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; width: 100%; font-family: 'Rubik', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    html, body { height: 100%; width: 100%; font-family: 'Rubik', sans-serif; -webkit-font-smoothing:antialiased; }
 
-    /* Theme variables (single source of truth) */
     body.dark {
-      --bg: #000000;
-      --panel: rgba(0,0,0,0.92);
+      --bg: #0b0b0b;
+      --panel: rgba(18, 18, 18, 0.96);
       --site-title: #ffffff;
       --text: #ffffff;
       --muted: #cbd5e1;
-      --muted-2: #94a3b8;
+      --muted-2: #334155;
       --accent: #dc2626;
       --store-filter: brightness(0) invert(1);
-      --badge-bg: rgba(0,0,0,0.6);
-      --badge-text: #ffffff;
-      --carousel-bg: linear-gradient(180deg, rgba(8,8,8,0.85), rgba(12,12,12,0.65));
-      --carousel-border: rgba(255,255,255,0.04);
-      --carousel-shadow: 0 30px 90px rgba(0,0,0,0.75);
+      --carousel-border: rgba(255, 255, 255, 0.1);
+      --content-bg: rgba(0, 0, 0, 0.3); 
       background: var(--bg);
       color: var(--text);
     }
 
     body.light {
       --bg: #f8fafc;
-      --panel: rgba(255,255,255,0.98);
-      --site-title: #0b1220;
-      --text: #0b1220;
-      --muted: #374151;
-      --muted-2: #6b7280;
+      --panel: rgba(255, 255, 255, 0.98);
+      --site-title: #0f172a;
+      --text: #0f172a;
+      --muted: #475569;
+      --muted-2: #cbd5e1;
       --accent: #dc2626;
       --store-filter: none;
-      --badge-bg: rgba(255,255,255,0.98);
-      --badge-text: #0b1220;
-      --carousel-bg: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,250,0.98));
-      --carousel-border: rgba(0,0,0,0.06);
-      --carousel-shadow: 0 18px 40px rgba(15,23,42,0.06);
+      --carousel-border: rgba(0, 0, 0, 0.08);
+      --content-bg: rgba(255, 255, 255, 0.4); 
       background: var(--bg);
       color: var(--text);
     }
@@ -56,280 +49,235 @@
       inset: 0 0 auto 0;
       z-index: 200;
       background: var(--panel);
-      backdrop-filter: blur(6px);
-      border-bottom: 1px solid rgba(0,0,0,0.04);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--carousel-border);
     }
-    .header-inner { max-width: 1200px; margin: 0 auto; padding: 12px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .site-title { font-weight:600; font-size:1rem; color: var(--site-title); user-select:none; }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: 14px 20px; display:flex; align-items:center; justify-content:space-between; }
 
-    /* Layout spacing */
-    main { padding-top: 72px; }
+    main { padding-top: 110px; }
 
     /* Hero */
-    .hero { max-width:1200px; margin: 20px auto; padding: 0 16px; text-align:center; }
-    .hero-title { font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight:700; margin-bottom: 6px; color: var(--site-title); }
-    .hero-sub { color: var(--muted); font-size: clamp(0.95rem, 1.7vw, 1.1rem); }
+    .hero { max-width:1200px; margin: 20px auto 30px; padding: 0 16px; text-align:center; }
+    .hero-title { font-size: clamp(2.2rem, 6vw, 3.2rem); font-weight:800; color: var(--site-title); letter-spacing: -1.5px; }
 
-    /* Carousel frame */
-    .carousel-wrap { max-width:1200px; margin: 16px auto; position: relative; padding: 0 18px; }
+    /* Carousel - Increased width for better presentation */
+    .carousel-wrap { max-width: 1200px; margin: 0 auto; position: relative; padding: 0 70px; } 
     .carousel {
       position: relative;
-      overflow: visible;            /* allow arrows to sit visually outside */
-      border-radius: 12px;
-      background: var(--carousel-bg);
+      overflow: hidden; 
+      border-radius: 24px;
       border: 1px solid var(--carousel-border);
-      box-shadow: var(--carousel-shadow);
-      outline: none;
+      box-shadow: 0 40px 80px -20px rgba(0,0,0,0.5);
+      background: #000;
     }
-    .carousel::after { content:""; position:absolute; inset:0; border-radius:12px; pointer-events:none; }
 
-    /* Slides (smaller vertically per request) */
     .carousel-slide {
       display: none;
       position: relative;
       width: 100%;
-      min-height: clamp(300px, 38vh, 520px); /* compact vertical size */
+      min-height: 600px;
       background-size: cover;
       background-position: center;
-      border-radius: 10px;
-      margin: 10px;                     /* inset from frame so edges visible */
-      overflow: hidden;
     }
-    @media (min-width: 768px) { .carousel-slide { min-height: clamp(340px, 40vh, 560px); } }
-    @media (min-width: 1200px) { .carousel-slide { min-height: clamp(380px, 44vh, 620px); } }
+    
+    /* Subtle gradient overlay to make text readable without covering the image */
+    .carousel-slide::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 30%, transparent 60%);
+        pointer-events: none;
+    }
 
-    .carousel-slide.active { display:block; animation: fadeIn .32s ease-in; }
-    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .carousel-slide.active { display:block; animation: slideFade 0.8s ease-out; }
+    @keyframes slideFade { from{opacity:0; transform: scale(1.05);} to{opacity:1; transform: scale(1);} }
 
-    /* Slide content anchored left; theme-driven text colors */
+    /* Compact Side Info Card */
     .slide-content {
       position: absolute;
-      left: 20px;
-      bottom: 20px;
+      left: 50px;
+      top: 50%;
+      transform: translateY(-50%);
       z-index: 20;
-      color: var(--text);
-      width: min(70%, 820px);
-      padding: 14px;
-      background: linear-gradient(90deg, rgba(0,0,0,0.14), rgba(0,0,0,0));
-      border-radius: 8px;
+      width: min(90%, 380px); /* Narrower card */
+      padding: 0;
+      background: transparent; /* No background box, uses the slide's gradient */
     }
-    @media (min-width:768px) { .slide-content { left:36px; bottom:36px; padding:18px; } }
-    @media (min-width:1200px) { .slide-content { left:56px; bottom:56px; padding:20px; } }
+    .slide-title { font-size: 2.5rem; font-weight:800; margin-bottom:12px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+    .slide-desc { color: #fff; opacity: 0.9; font-size: 1.05rem; line-height:1.5; margin-bottom:28px; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
 
-    .slide-title { font-size: clamp(1.05rem, 2.1vw, 1.8rem); font-weight:700; margin-bottom:8px; color: var(--text); }
-    .slide-desc { color: var(--muted); font-size: 1rem; line-height:1.45; margin-bottom:10px; }
+    /* Glass buttons for stores */
+    .store-btn { padding:12px; border-radius:12px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); cursor:pointer; transition: 0.2s; }
+    .store-btn:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+    .store-logo { width: 22px; height: 22px; filter: brightness(0) invert(1); }
 
-    /* Badge */
+    .trailer-btn { display:inline-flex; gap:12px; align-items:center; padding: 16px 32px; border-radius:14px; background: var(--accent); color:#fff; font-weight:700; border:none; cursor:pointer; transition: 0.3s; }
+    .trailer-btn:hover { transform: scale(1.05); box-shadow: 0 10px 25px rgba(220, 38, 38, 0.4); }
+
+    /* Badges */
     .slide-badge {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      z-index: 30;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-weight:700;
-      font-size: 0.82rem;
-      background: var(--badge-bg);
-      color: var(--badge-text);
-      backdrop-filter: blur(6px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+      display: inline-block;
+      margin-bottom: 15px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
+    .badge-new { background: #dc2626; color: #fff; }
+    .badge-soon { background: #eab308; color: #000; }
 
-    /* Store logos and buttons */
-    .store-row { display:flex; gap:10px; align-items:center; margin-bottom:10px; }
-    .store-btn { display:inline-flex; align-items:center; justify-content:center; padding:8px; border-radius:8px; background: rgba(255,255,255,0.03); backdrop-filter: blur(6px); border:none; cursor:pointer; }
-    .store-logo { width:28px; height:28px; object-fit:contain; filter: var(--store-filter); }
-
-    .trailer-btn { display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border-radius:10px; background: var(--accent); color:#fff; font-weight:700; border:none; cursor:pointer; }
-
-    /* Arrows: keep stable when shown; use transform offset so they are reachable */
+    /* Controls - Moved slightly further out */
     .carousel-arrow {
       position: absolute;
       top: 50%;
-      z-index: 80;
-      width: 48px;
-      height: 48px;
-      border-radius: 9999px;
+      z-index: 100;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
       display:flex; align-items:center; justify-content:center;
-      background: rgba(0,0,0,0.58);
-      color: #fff;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.45);
-      transition: opacity .14s ease, transform .11s ease;
-      opacity: 0;
-      pointer-events: none;
-      border: none;
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid var(--carousel-border);
       cursor: pointer;
+      transform: translateY(-50%);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     }
-
-    .arrow-left { left: 0; transform: translate(-120%, -50%); }
-    .arrow-right { right: 0; transform: translate(120%, -50%); }
-
-    /* show-arrows toggled by JS; hover/focus-within fallback */
-    .carousel-wrap.show-arrows .carousel-arrow { opacity:1; pointer-events:auto; transform: translateY(-50%) scale(1.02); }
-    .carousel-wrap.show-arrows .arrow-left { transform: translate(-120%, -50%) scale(1.02); }
-    .carousel-wrap.show-arrows .arrow-right { transform: translate(120%, -50%) scale(1.02); }
-
-    .carousel-wrap:hover .carousel-arrow,
-    .carousel-wrap:focus-within .carousel-arrow { opacity:1; pointer-events:auto; transform: translateY(-50%) scale(1.02); }
-
-    @media (max-width:420px) { .carousel-arrow { display:none; } }
+    .arrow-left { left: 5px; }
+    .arrow-right { right: 5px; }
+    .carousel-arrow:hover { background: var(--accent); color: white; border-color: var(--accent); transform: translateY(-50%) scale(1.15); }
 
     /* Indicators */
-    .indicators { display:flex; justify-content:center; gap:8px; margin-top:10px; }
-    .indicator { width:10px; height:10px; border-radius:9999px; background: var(--muted-2); transition: width .22s ease, background .18s; border:none; cursor:pointer; }
-    .indicator.active { width:40px; background: var(--accent); }
+    .indicators { display:flex; justify-content:center; gap:14px; margin-top:35px; }
+    .indicator { width:10px; height:10px; border-radius:50%; background: var(--muted-2); border:none; cursor:pointer; transition: 0.4s ease; }
+    .indicator.active { width:40px; border-radius: 5px; background: var(--accent); }
 
-    /* About & footer */
-    .about { max-width:1200px; margin: 20px auto; padding: 16px; text-align:center; color: var(--muted); }
-    footer { margin-top: 20px; padding:18px 16px; text-align:center; color: var(--muted); }
+    /* Footer */
+    footer { margin-top: 80px; padding: 60px 20px; text-align: center; border-top: 1px solid var(--carousel-border); }
+    .footer-socials { display:flex; justify-content:center; gap:35px; margin-bottom:25px; }
+    .social-link img { width: 26px; height: 26px; opacity: 0.7; transition: 0.3s; }
+    .social-link:hover img { opacity: 1; transform: translateY(-3px); }
 
-    /* Modal */
-    .modal { display:none; position:fixed; inset:0; align-items:center; justify-content:center; background: rgba(0,0,0,0.85); z-index:200; padding: 12px; }
+    /* Video Modal */
+    .modal { 
+      display:none; position:fixed; inset:0; align-items:center; justify-content:center; 
+      background: rgba(0,0,0,0.95); z-index:1000; padding: 20px; backdrop-filter: blur(10px);
+    }
     .modal.active { display:flex; }
-    .close-modal { position:absolute; right: 12px; top: 12px; background: transparent; border:none; color: var(--text); font-weight:700; font-size:18px; cursor:pointer; }
-
-    /* focus */
-    :focus { outline: 3px solid rgba(220,38,38,0.12); outline-offset: 3px; }
+    .modal-content { position:relative; width:100%; max-width:1100px; animation: modalIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes modalIn { from{transform: scale(0.95); opacity: 0;} to{transform: scale(1); opacity: 1;} }
+    .close-modal { position: absolute; top: -50px; right: 0; background: none; border: none; color: #fff; font-size: 1.1rem; cursor: pointer; }
   </style>
 </head>
 <body class="dark">
 
-  <!-- Header -->
   <header>
     <div class="header-inner">
-      <div style="display:flex;align-items:center;gap:12px;">
-        <img src="images/logo.png" alt="Decimate Games logo" style="height:40px; width:auto; display:block;" />
-         <!-- <span class="site-title">Decimate Games</span> -->
-      </div>
-
-      <div style="display:flex;align-items:center;gap:8px;">
-        <button id="themeToggle" aria-label="Toggle theme" class="p-2 rounded-md" style="background:transparent; border:none; cursor:pointer;">
-          <svg id="sunIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-          <svg id="moonIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display:none;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-        </button>
-      </div>
+      <img src="images/logo.png" alt="Logo" style="height:40px;" />
+      <button id="themeToggle" class="p-2 transition-transform hover:rotate-12">
+        <svg id="sunIcon" width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        <svg id="moonIcon" width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:none;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+      </button>
     </div>
   </header>
 
   <main>
-    <!-- Hero -->
-    <section class="hero" aria-labelledby="hero-title">
-      <h1 id="hero-title" class="hero-title">Decimate Games</h1>
-      <p class="hero-sub">Beautifully Broken. Brutally Fun.</p>
+    <section class="hero">
+      <h1 class="hero-title">Decimate Games</h1>
     </section>
 
-    <!-- Carousel -->
-    <section class="carousel-wrap" id="carouselWrap" aria-label="Featured games carousel">
+    <section class="carousel-wrap" id="carouselWrapper">
       <div class="carousel" id="carousel">
-
-        <!-- Slide 1 -->
-        <div class="carousel-slide active" data-badge="New" style="background-image: linear-gradient(to top, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.12) 45%, transparent 100%), url('images/game_placeholder_art.png');">
-          <div class="slide-badge" aria-hidden="true">New</div>
+        <div class="carousel-slide active" style="background-image: url('images/game_placeholder_art.png');">
           <div class="slide-content">
-            <div class="slide-title">Shipping Nightmares</div>
-            <div class="slide-desc">A co-op horror game where you and your teammates scavenge for supplies and survive relentless horrors lurking in the shadows.</div>
+            <span class="slide-badge badge-soon">In Development</span>
+            <h2 class="slide-title">Shipping Nightmares</h2>
+            <p class="slide-desc">A co-op horror game where you and your team scavenge for supplies while surviving relentless horrors in the shadows.</p>
+			  <div class="flex gap-3 mb-6">
+				  <a href="https://store.steampowered.com/app/3480910/Shipping_Nightmares/" 
+					 target="_blank" 
+					 rel="noopener noreferrer" 
+					 class="store-btn" 
+					 aria-label="View on Steam">
+					<img src="images/steam.png" class="store-logo" alt="Steam"/>
+				  </a>
 
-            <div class="store-row">
-              <button class="store-btn" aria-label="Steam store">
-                <img src="images/steam.png" alt="Steam" class="store-logo" />
-              </button>
-              <button class="store-btn" aria-label="Epic Games store">
-                <img src="images/epicgames.png" alt="Epic Games" class="store-logo" />
-              </button>
-            </div>
-
-            <button class="trailer-btn" data-trailer="https://www.youtube.com/embed/dQw4w9WgXcQ" aria-label="Watch trailer for Shipping Nightmares">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+				  <a href="#" 
+					 target="_blank" 
+					 rel="noopener noreferrer" 
+					 class="store-btn" 
+					 aria-label="View on Epic Games Store">
+					<img src="images/epicgames.png" class="store-logo" alt="Epic"/>
+				  </a>
+			</div>
+            <button class="trailer-btn" data-trailer="https://www.youtube.com/embed/dQw4w9WgXcQ">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               Watch Trailer
             </button>
           </div>
         </div>
 
-        <!-- Slide 2 -->
-        <div class="carousel-slide" data-badge="Coming Soon" style="background-image: linear-gradient(to top, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.12) 45%, transparent 100%), url('images/placeholder.png');">
-          <div class="slide-badge" aria-hidden="true">Coming Soon</div>
+        <div class="carousel-slide" style="background-image: url('images/placeholder.png');">
           <div class="slide-content">
-            <div class="slide-title">Untitled Project</div>
-            <div class="slide-desc">We’re cooking something brutal — stay tuned.</div>
+            <span class="slide-badge badge-soon">In Development</span>
+            <h2 class="slide-title">Untitled Project</h2>
+            <p class="slide-desc">We’re cooking something up. Stay tuned !</p>
+            <div class="flex gap-3 mb-6">
+				  <a href="#" 
+					 target="_blank" 
+					 rel="noopener noreferrer" 
+					 class="store-btn" 
+					 aria-label="View on Steam">
+					<img src="images/steam.png" class="store-logo" alt="Steam"/>
+				  </a>
 
-            <div class="store-row">
-              <button class="store-btn" aria-label="Steam store">
-                <img src="images/steam.png" alt="Steam" class="store-logo" />
-              </button>
-              <button class="store-btn" aria-label="PlayStation store">
-                <img src="images/playstation.png" alt="PlayStation" class="store-logo" />
-              </button>
-            </div>
-
-            <button class="trailer-btn" data-trailer="https://www.youtube.com/embed/dQw4w9WgXcQ" aria-label="Watch trailer for Untitled Project">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-              Trailer
-            </button>
+				  <a href="#" 
+					 target="_blank" 
+					 rel="noopener noreferrer" 
+					 class="store-btn" 
+					 aria-label="View on Epic Games Store">
+					<img src="images/epicgames.png" class="store-logo" alt="Epic"/>
+				  </a>
+			</div>
+            <button class="trailer-btn" data-trailer="https://www.youtube.com/embed/dQw4w9WgXcQ">View Teaser</button>
           </div>
         </div>
-
-        <!-- Controls -->
-        <button id="prevBtn" class="carousel-arrow arrow-left" aria-label="Previous slide" title="Previous">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-        </button>
-
-        <button id="nextBtn" class="carousel-arrow arrow-right" aria-label="Next slide" title="Next">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-        </button>
-
       </div>
 
-      <!-- Indicators -->
-      <div id="indicators" class="indicators" role="tablist" aria-label="Slide indicators"></div>
-    </section>
+      <button id="prevBtn" class="carousel-arrow arrow-left" aria-label="Previous Slide">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button id="nextBtn" class="carousel-arrow arrow-right" aria-label="Next Slide">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
 
-    <!-- About -->
-    <section class="about" aria-labelledby="about-title">
-      <h2 id="about-title" style="font-weight:700; font-size:1.05rem; margin-bottom:8px; color:var(--site-title)">About Our Studio</h2>
-      <p>We are a small indie team creating focused, memorable games. We handle everything from concept to release, putting care and personality into every project.</p>
+      <div id="indicators" class="indicators"></div>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer>
-    <div style="max-width:1200px;margin:0 auto;padding:0 16px;">
-      <div style="display:flex;justify-content:center;gap:12px;margin-bottom:12px;">
-        <a href="#" aria-label="X"><img src="images/x.png" alt="X" style="width:22px;filter:var(--store-filter)" /></a>
-        <a href="#" aria-label="Facebook"><img src="images/facebook.png" alt="Facebook" style="width:22px;filter:var(--store-filter)" /></a>
-        <a href="#" aria-label="Instagram"><img src="images/instagram.png" alt="Instagram" style="width:22px;filter:var(--store-filter)" /></a>
-        <a href="#" aria-label="YouTube"><img src="images/youtube.png" alt="YouTube" style="width:22px;filter:var(--store-filter)" /></a>
-      </div>
-      <div style="color:var(--muted);">© 2025 DecimateGames. All rights reserved.</div>
+    <div class="footer-socials">
+      <a href="#" class="social-link"><img src="images/twitter.png" alt="X" /></a>
+      <a href="#" class="social-link"><img src="images/facebook.png" alt="Facebook" /></a>
+      <a href="#" class="social-link"><img src="images/instagram.png" alt="Instagram" /></a>
+      <a href="#" class="social-link"><img src="images/youtube.png" alt="YouTube" /></a>
     </div>
+    <div style="font-size:0.9rem; opacity:0.5; font-weight: 500;">© 2026 Decimate Games. All rights reserved.</div>
   </footer>
 
-  <!-- Trailer Modal -->
-  <div id="trailerModal" class="modal" aria-hidden="true" role="dialog" aria-label="Trailer dialog">
-    <div style="position:relative; width:100%; max-width:960px;">
-      <button id="closeModal" class="close-modal" aria-label="Close trailer">✕</button>
-      <div style="width:100%; padding-top:56.25%; position:relative;">
-        <iframe id="trailerIframe" style="position:absolute; inset:0; width:100%; height:100%; border-radius:8px; border:0;" src="" allowfullscreen title="Trailer"></iframe>
+  <div id="trailerModal" class="modal">
+    <div class="modal-content">
+      <button id="closeModal" class="close-modal">✕ Close Player</button>
+      <div style="padding-top:56.25%; position:relative; background:#000; border-radius:20px; overflow:hidden;">
+        <iframe id="trailerIframe" style="position:absolute; inset:0; width:100%; height:100%; border:0;" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </div>
   </div>
 
   <script>
     (function () {
-      // Safety: ensure we only initialize once
-      if (window.__decimate_carousel_initialized) return;
-      window.__decimate_carousel_initialized = true;
-
-      // If multiple .carousel elements exist (accidental duplicates), keep the first and remove the rest.
-      (function removeExtraCarousels() {
-        const carousels = Array.from(document.querySelectorAll('.carousel'));
-        if (carousels.length > 1) {
-          for (let i = 1; i < carousels.length; i++) {
-            carousels[i].remove();
-          }
-        }
-      })();
-
-      // Theme handling
       const body = document.body;
       const themeToggle = document.getElementById('themeToggle');
       const sunIcon = document.getElementById('sunIcon');
@@ -337,139 +285,77 @@
 
       function applyTheme(theme) {
         if (theme === 'light') {
-          body.classList.remove('dark'); body.classList.add('light');
-          sunIcon.style.display = 'none'; moonIcon.style.display = 'inline-block';
+          body.classList.replace('dark', 'light');
+          sunIcon.style.display = 'none'; moonIcon.style.display = 'block';
         } else {
-          body.classList.remove('light'); body.classList.add('dark');
-          sunIcon.style.display = 'inline-block'; moonIcon.style.display = 'none';
+          body.classList.replace('light', 'dark');
+          sunIcon.style.display = 'block'; moonIcon.style.display = 'none';
         }
         localStorage.setItem('decimate_theme', theme);
       }
-      const saved = localStorage.getItem('decimate_theme');
-      applyTheme(saved === 'light' ? 'light' : 'dark');
+      applyTheme(localStorage.getItem('decimate_theme') || 'dark');
       themeToggle.addEventListener('click', () => applyTheme(body.classList.contains('dark') ? 'light' : 'dark'));
 
-      /* CAROUSEL logic */
-      const carouselWrap = document.getElementById('carouselWrap');
-      const carousel = document.getElementById('carousel');
-      const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+      const slides = document.querySelectorAll('.carousel-slide');
       const indicatorsWrap = document.getElementById('indicators');
-      const nextBtn = document.getElementById('nextBtn');
-      const prevBtn = document.getElementById('prevBtn');
+      const wrapper = document.getElementById('carouselWrapper');
       let current = 0;
-      const total = slides.length;
-      let auto = null;
+      let slideInterval;
+      const DISPLAY_TIME = 8000;
 
-      // Clear indicators and rebuild safely
-      function createIndicators() {
-        indicatorsWrap.innerHTML = '';
-        for (let i = 0; i < total; i++) {
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'indicator';
-          btn.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-          btn.dataset.index = i;
-          btn.addEventListener('click', e => {
-            stopAuto(); goTo(+e.currentTarget.dataset.index); startAuto();
-          });
-          indicatorsWrap.appendChild(btn);
-        }
-      }
-
-      function updateIndicators() {
-        const nodes = Array.from(indicatorsWrap.children || []);
-        nodes.forEach((n, i) => n.classList.toggle('active', i === current));
-      }
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'indicator' + (i === 0 ? ' active' : '');
+        dot.onclick = () => { show(i); resetAutoplay(); };
+        indicatorsWrap.appendChild(dot);
+      });
 
       function show(index) {
-        index = (index + total) % total;
-        slides.forEach((s, i) => s.classList.toggle('active', i === index));
-        current = index;
-        updateIndicators();
+        slides[current].classList.remove('active');
+        indicatorsWrap.children[current].classList.remove('active');
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        indicatorsWrap.children[current].classList.add('active');
       }
 
-      function goTo(i) { show(i); }
-      function next() { show(current + 1); }
-      function prev() { show(current - 1); }
-
-      nextBtn.addEventListener('click', () => { stopAuto(); next(); startAuto(); });
-      prevBtn.addEventListener('click', () => { stopAuto(); prev(); startAuto(); });
-
-      // Auto slide
-      function startAuto() { if (!auto) auto = setInterval(next, 5000); }
-      function stopAuto() { if (auto) { clearInterval(auto); auto = null; } }
-
-      // Arrow visibility: show immediately on enter, but delay hiding to avoid flicker
-      let hideTimer = null;
-      function showArrows() {
-        if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
-        carouselWrap.classList.add('show-arrows');
-      }
-      function hideArrowsDelayed(delay = 300) {
-        if (hideTimer) clearTimeout(hideTimer);
-        hideTimer = setTimeout(() => {
-          carouselWrap.classList.remove('show-arrows');
-          hideTimer = null;
-        }, delay);
+      function startAutoplay() {
+        if (slideInterval) clearInterval(slideInterval);
+        slideInterval = setInterval(() => show(current + 1), DISPLAY_TIME);
       }
 
-      carouselWrap.addEventListener('mouseenter', () => { showArrows(); stopAuto(); });
-      carouselWrap.addEventListener('mouseleave', () => { hideArrowsDelayed(300); startAuto(); });
+      function resetAutoplay() {
+        clearInterval(slideInterval);
+        startAutoplay();
+      }
 
-      // Keep arrows visible during keyboard focus inside carousel
-      carouselWrap.addEventListener('focusin', () => showArrows());
-      carouselWrap.addEventListener('focusout', () => hideArrowsDelayed(150));
+      wrapper.onmouseenter = () => clearInterval(slideInterval);
+      wrapper.onmouseleave = () => startAutoplay();
 
-      // keyboard navigation
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') { stopAuto(); next(); startAuto(); }
-        if (e.key === 'ArrowLeft') { stopAuto(); prev(); startAuto(); }
-      });
+      document.getElementById('nextBtn').onclick = () => { show(current + 1); resetAutoplay(); };
+      document.getElementById('prevBtn').onclick = () => { show(current - 1); resetAutoplay(); };
 
-      // Init carousel
-      createIndicators();
-      show(0);
-      startAuto();
-
-      /* Trailer modal */
+      // Modal
       const modal = document.getElementById('trailerModal');
-      const trailerIframe = document.getElementById('trailerIframe');
-      const closeModal = document.getElementById('closeModal');
-      const trailerBtns = Array.from(document.querySelectorAll('.trailer-btn'));
-
-      trailerBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const url = btn.dataset.trailer;
-          if (!url) return;
-          trailerIframe.src = url;
-          modal.classList.add('active');
-          modal.setAttribute('aria-hidden', 'false');
-        });
-      });
-
-      closeModal.addEventListener('click', () => {
-        trailerIframe.src = '';
+      const iframe = document.getElementById('trailerIframe');
+      const closePlayer = () => {
         modal.classList.remove('active');
-        modal.setAttribute('aria-hidden', 'true');
+        iframe.src = "";
+        startAutoplay();
+      };
+
+      document.querySelectorAll('.trailer-btn').forEach(btn => {
+        btn.onclick = () => {
+          clearInterval(slideInterval);
+          iframe.src = btn.dataset.trailer + "?autoplay=1";
+          modal.classList.add('active');
+        };
       });
 
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          trailerIframe.src = '';
-          modal.classList.remove('active');
-          modal.setAttribute('aria-hidden', 'true');
-        }
-      });
+      document.getElementById('closeModal').onclick = closePlayer;
+      modal.onclick = (e) => { if (e.target === modal) closePlayer(); };
+      window.addEventListener('keydown', (e) => { if (e.key === "Escape") closePlayer(); });
 
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-          trailerIframe.src = '';
-          modal.classList.remove('active');
-          modal.setAttribute('aria-hidden', 'true');
-        }
-      });
-
+      startAutoplay();
     })();
   </script>
 </body>
