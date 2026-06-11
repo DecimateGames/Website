@@ -1,0 +1,59 @@
+# Dependencies
+node_modules/
+
+# User Uploaded Content
+server/uploads/*
+server/node_modules/
+client/node_modules/
+
+*.mp4
+*.avi
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# Build output
+dist/
+build/
+out/
+
+# Coverage
+coverage/
+
+# Cache
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.svelte-kit/
+.vite/
+.eslintcache
+*.tsbuildinfo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Temporary
+tmp/
+temp/
+
+# Package manager stores (optional)
+.pnpm-store/
+
+# Misc
+*.pid
+*.seed
